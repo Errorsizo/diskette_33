@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>(￣^￣)</title>
+<style>
+  /* 갈무리11 픽셀 폰트 불러오기 */
+@import url('https://cdn.jsdelivr.net/npm/galmuri@latest/dist/galmuri.css');
+
+@font-face {
+    font-family: 'Galmuri11',monospace;
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/2506-1@1.0/Galmuri11-Bold.woff2') format('woff2');
+}
+
+  * {
+    font-family: 'Galmuri11', monospace !important;
+  }
+
+  body {
+    background-color: #000;
+    color: #0f0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    font-family: 'Galmuri11', monospace;
+  }
+  
+  .container {
+    border: 2px solid #0f0;
+    padding: 30px;
+    width: 90%;
+    max-width: 600px;
+    text-align: center;
+    font-family: 'Galmuri11', monospace;
+  }
+
+  h2 {
+    margin-top: 0;
+    letter-spacing: 2px;
+    font-family: 'Galmuri11', monospace;
+  }
+
+  textarea {
+    width: 100%;
+    height: 100px;
+    background-color: #111;
+    color: #0f0;
+    border: 1px solid #0f0;
+    padding: 15px;
+    box-sizing: border-box;
+    margin-bottom: 15px;
+    font-size: 18px;
+    resize: none;
+    outline: none;
+    font-family: 'Galmuri11', monospace;
+  }
+
+  /* 2. placeholder 폰트 설정 (브라우저별 대응) */
+  textarea::placeholder {
+    font-family: 'Galmuri11', sans-serif;
+    color: #004400; 
+    opacity: 1;
+  }
+
+  textarea:focus {
+    font-family: 'Galmuri11', monospace;
+  }
+
+  .btn-group {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    margin-bottom: 15px;
+    font-family: 'Galmuri11', monospace;
+  }
+
+  button {
+    background-color: #0f0;
+    color: #000;
+    border: none;
+    padding: 12px 20px;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 16px;
+    transition: 0.2s;
+  }
+
+  button:hover {
+    background-color: #fff;
+  }
+
+  .copy-btn {
+    background-color: #0f0;
+    color: #000;
+    border: none;
+    padding: 12px 20px;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 16px;
+    transition: 0.2s;
+  }
+
+  #toast {
+    color: #fff;
+    font-size: 14px;
+    margin-top: 10px;
+    height: 15px;
+  }
+</style>
+</head>
+<body>
+
+  <div class="container">
+    <h2>diskette_33 ＼(￣▽￣)／</h2>
+    
+    <textarea id="inputText" placeholder="여기에 텍스트 입력..."></textarea>
+    
+    <div class="btn-group">
+      <button onclick="convertToMeme()">변환ㅎrㄱl</button>
+      <button class="copy-btn" onclick="copyToClipboard()">복ㅅrㅎrㄱl</button>
+    </div>
+    
+    <textarea id="outputText" placeholder="결과ㄱr 여ㄱl에 ㄴr옵LI⊂ト..." readonly></textarea>
+    <div id="toast"></div>
+  </div>
+
+  <script>
+    const memeDictionary = {
+      'ㅏ': 'ト',
+      'ㅏ': 'r',
+      'ㅔ': 'ㅓㅣ',
+      '어': 'ㅇㅓ',
+      '아': 'ㅇr',
+      '아': 'ㅇト',
+      '다': '⊂ト',
+      '니': 'LI',
+      '하': '㈛',
+      '지': 'ㅈl',
+      '기': 'ㄱl',
+      '이': '○l',
+      '그': 'ュ',
+      '자': 'ㅈr',
+      '짜': 'ㅉr',
+      '사': 'ㅅr',
+      '비': 'ㅂl',
+      '시': 'ㅅl',
+      '마': 'ㅁr',
+      '고': 'ヱ',
+      '로': '己ㅗ',
+      '리': '己l',
+      '나': 'ㄴr',
+      '바': 'ㅂr',
+      '대': 'ㄷH',
+      '해': 'ㅎH',
+      '야': 'ㅇㅑ',
+      '세': 'ㅅㅔ'
+    };
+
+    function convertToMeme() {
+      let text = document.getElementById('inputText').value;
+      for (const [key, value] of Object.entries(memeDictionary)) {
+        const regex = new RegExp(key, 'g');
+        text = text.replace(regex, value);
+      }
+      document.getElementById('outputText').value = text;
+      document.getElementById('toast').innerText = "";
+    }
+
+    function copyToClipboard() {
+      const output = document.getElementById('outputText');
+      if (!output.value) return;
+      output.select();
+      document.execCommand('copy');
+      const toast = document.getElementById('toast');
+      toast.innerText = "클립보드ㅇㅔ 복사되었습LI⊂ト!";
+      setTimeout(() => { toast.innerText = ""; }, 2000);
+    }
+  </script>
+
+</body>
+</html>
