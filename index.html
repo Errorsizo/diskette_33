@@ -184,8 +184,10 @@ function convertToMeme() {
         text = text.replace(regex, value);
       }
 
-      text = text.replace(/([!?. ,~;])(?=[^ ])/g, '$1 ');
 
+      text = text.replace(/([!?.~;])/g, '$1 ');
+      text = text.replace(/ +/g, ' ');
+      text = text.trim();
       document.getElementById('outputText').value = text;
       document.getElementById('toast').innerText = "";
     }
