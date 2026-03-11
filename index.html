@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>(￣^￣)</title>
 <style>
-  /* 갈무리11 픽셀 폰트 불러오기 */
+
 @import url('https://cdn.jsdelivr.net/npm/galmuri@latest/dist/galmuri.css');
 
 @font-face {
@@ -58,7 +58,7 @@
     font-family: 'Galmuri11', monospace;
   }
 
-  /* 2. placeholder 폰트 설정 (브라우저별 대응) */
+
   textarea::placeholder {
     font-family: 'Galmuri11', sans-serif;
     color: #004400; 
@@ -136,6 +136,7 @@
       '아': 'ㅇΓ',
       '어': 'ㅇ┩',
       '이': '○l',
+      '저': 'ㅈ┩',
       '사': 'ㅅト',
       '다': '⊂ト',
       '디': 'ㄷ|',
@@ -171,6 +172,20 @@
         const regex = new RegExp(key, 'g');
         text = text.replace(regex, value);
       }
+      document.getElementById('outputText').value = text;
+      document.getElementById('toast').innerText = "";
+    }
+    
+function convertToMeme() {
+      let text = document.getElementById('inputText').value;
+
+      for (const [key, value] of Object.entries(memeDictionary)) {
+        const regex = new RegExp(key, 'g');
+        text = text.replace(regex, value);
+      }
+
+      text = text.replace(/([!?. ,~;])(?=[^ ])/g, '$1 ');
+
       document.getElementById('outputText').value = text;
       document.getElementById('toast').innerText = "";
     }
