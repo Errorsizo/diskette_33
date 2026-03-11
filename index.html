@@ -129,61 +129,53 @@
 
   <script>
     const memeDictionary = {
-      'ㅏ': 'ト',
-      'ㅏ': 'r',
       '에': 'ㅇㅔ',
-      '어': 'ㅇㅓ',
-      '아': 'ㅇΓ',
-      '어': 'ㅇ┩',
-      '이': '○l',
-      '저': 'ㅈ┩',
-      '사': 'ㅅト',
-      '다': '⊂ト',
-      '디': 'ㄷ|',
-      '피': 'ㅍ1',
-      '니': 'LI',
+      '어': ['ㅇㅓ', '어', 'ㅇ┩'],
+      '아': ['ㅇr', 'ㅇト','아'],
+      '이': ['이', '○l', 'ㅇl'],
+      '저': ['ㅈ┩', '저'],
+      '사': ['사', 'ㅅr', 'ㅅΓ', 'ㅅト'],
+      '다': ['ㄷΓ','⊂ト', '다'],
+      '디': ['ㄷl', 'ㄷ|'],
+      '피': ['ㅍ|', 'ㅍl'],
+      '니': ['LI', 'ㄴl','니'],
       '하': '㈛',
-      '지': 'ㅈl',
-      '기': 'ブㅣ',
+      '지': ['ㅈl', 'ㅈ|', '지'],
+      '기': ['기', 'ㄱ|', 'ㄱ1'],
+      '까': ['ㄲr', 'ㄲΓ', 'ㄲト'],
       '그': 'ュ',
-      '가': 'ㄱㅏ',
-      '미': 'ㅁ|',
-      '자': 'ㅈr',
+      '가': ['ㄱΓ','ブㅏ', 'ㄱㅏ'],
+      '미': ['ㅁ|', 'ㅁ1', '미'],
+      '자': ['ㅈΓ','ㅈㅏ', 'ㅈㅏ','자'],
       '짜': 'ㅉト',
-      '사': 'ㅅΓ',
       '서': 'ㅅ┩',
-      '비': 'ㅂl',
-      '시': 'ㅅl',
-      '마': 'ㅁト',
+      '비': ['ㅂ|', 'ㅂ1', '비'],
+      '시': ['ㅅ|', 'ㅅ1', '시'],
+      '마': ['ㅁΓ','ㅁr', 'ㅁト','마'],
       '고': 'ヱ',
       '로': '己ㅗ',
-      '리': '己l',
-      '나': 'ㄴr',
-      '바': 'ㅂト',
+      '리': ['己|', 'ㄹ1', '리'],
+      '나': ['ㄴΓ','ㄴr', 'ㄴト','나'],
+      '바': ['ㅂr', 'ㅂト','바'],
       '대': 'ㄷH',
       '해': 'ㅎH',
       '야': 'ㅇㅑ',
       '세': 'ㅅㅔ'
     };
 
-    function convertToMeme() {
-      let text = document.getElementById('inputText').value;
-      for (const [key, value] of Object.entries(memeDictionary)) {
-        const regex = new RegExp(key, 'g');
-        text = text.replace(regex, value);
-      }
-      document.getElementById('outputText').value = text;
-      document.getElementById('toast').innerText = "";
-    }
-    
 function convertToMeme() {
       let text = document.getElementById('inputText').value;
 
+      // 사전 기반 변환 (랜덤 대응)
       for (const [key, value] of Object.entries(memeDictionary)) {
         const regex = new RegExp(key, 'g');
-        text = text.replace(regex, value);
+        text = text.replace(regex, () => {
+          if (Array.isArray(value)) {
+            return value[Math.floor(Math.random() * value.length)];
+          }
+          return value;
+        });
       }
-
 
       text = text.replace(/([!?.~;])/g, '$1 ');
       text = text.replace(/ +/g, ' ');
